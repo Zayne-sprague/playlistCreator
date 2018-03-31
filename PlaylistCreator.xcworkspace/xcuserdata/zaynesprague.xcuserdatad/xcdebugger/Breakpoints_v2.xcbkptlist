@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PlaylistCreator/VideoController.swift"
-            timestampString = "543560931.522068"
+            timestampString = "544151795.738001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PlaylistCreator/ViewController.swift"
-            timestampString = "544143283.725767"
+            timestampString = "544152435.077816"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "searchButtonPress(_:)"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "tagsTouchAction(_:tagButton:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PlaylistCreator/ViewController.swift"
-            timestampString = "544143283.728865"
+            timestampString = "544152435.078251"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "searchButtonPress(_:)"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "tagsTouchAction(_:tagButton:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PlaylistCreator/ViewController.swift"
-            timestampString = "544143283.7292171"
+            timestampString = "544152435.078563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "searchButtonPress(_:)"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "tagsTouchAction(_:tagButton:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,12 +106,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PlaylistCreator/VideoController.swift"
-            timestampString = "543560931.523681"
+            timestampString = "544151795.739382"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
             endingLineNumber = "67"
             landmarkName = "nextVideo(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PlaylistCreator/ViewController.swift"
+            timestampString = "544152435.078879"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "searchButtonPress(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
