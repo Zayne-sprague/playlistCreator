@@ -73,6 +73,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
            
             secondVC.videos = self.videoIds!
             secondVC.index = 0
+            secondVC.tags = self.tagsView.tagTextArray
         }
     }
     

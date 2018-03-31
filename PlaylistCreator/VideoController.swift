@@ -13,10 +13,12 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     
     var videos : [String]?
     var index: Int?
+    var tags: [String]?
     
     @IBOutlet weak var nextVideoButton: UIButton!
     @IBOutlet weak var lastVideoButton: UIButton!
     
+    @IBOutlet weak var titleTagLabel: UILabel!
     @IBOutlet weak var playerView: YTPlayerView!
 
     override func viewDidLoad() {
@@ -38,15 +40,19 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
             self.lastVideoButton.isEnabled = true;
         }
         
+        titleTagLabel.text = tags![index!]
+        
         // Do any additional setup after loading the view.
     }
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         self.playerView.playVideo()
     }
+    
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
         if(state == YTPlayerState.ended){
             self.index! += 1
+            titleTagLabel.text = tags![index!]
             self.goToAdvertisements()
             if self.index! < (self.videos!.count) {
                 playerView.load(withVideoId: (self.videos?[self.index!])!, playerVars: ["playsinline": 1, "autoplay": 1]);
@@ -64,6 +70,8 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     @IBAction func nextVideo(_ sender: Any) {
         self.index! += 1
         self.goToAdvertisements()
+        titleTagLabel.text = tags![index!]
+
         playerView.load(withVideoId: (self.videos?[self.index!])!, playerVars: ["playsinline": 1, "autoplay": 1]);
         
         if self.index! >= (self.videos!.count - 1){
@@ -80,6 +88,7 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     @IBAction func lastVideo(_ sender: Any) {
         
         self.index! -= 1
+        titleTagLabel.text = tags![index!]
         playerView.load(withVideoId: (self.videos?[self.index!])!, playerVars: ["playsinline": 1, "autoplay": 1]);
         
         if self.index! <= 0{
@@ -106,7 +115,7 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
             
             secondVC.videos = self.videos
             secondVC.index = self.index
-            
+            secondVC.tags = self.tags
         }
     }
     

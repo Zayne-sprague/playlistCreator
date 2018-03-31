@@ -243,12 +243,24 @@
                                     <constraint firstAttribute="height" constant="220" id="qWL-uI-LsP"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJz-av-XMA">
+                                <rect key="frame" x="47" y="153" width="280" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="nSi-Yv-gw5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.42745098040000001" green="0.44705882349999998" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="3R5-cw-ZJN" firstAttribute="trailing" secondItem="McL-d8-Bpg" secondAttribute="trailing" constant="16" id="BPO-ea-bmo"/>
+                            <constraint firstItem="3R5-cw-ZJN" firstAttribute="trailing" secondItem="YJz-av-XMA" secondAttribute="trailing" constant="47.5" id="XbP-DY-rZf"/>
                             <constraint firstItem="kiO-On-gOq" firstAttribute="leading" secondItem="3R5-cw-ZJN" secondAttribute="leading" id="ZVH-hN-Sct"/>
+                            <constraint firstItem="McL-d8-Bpg" firstAttribute="top" secondItem="YJz-av-XMA" secondAttribute="bottom" constant="20" id="cfJ-u4-aBR"/>
                             <constraint firstItem="XID-7W-xWI" firstAttribute="top" secondItem="qYU-aC-4GR" secondAttribute="top" id="dad-gj-KGh"/>
+                            <constraint firstItem="YJz-av-XMA" firstAttribute="leading" secondItem="3R5-cw-ZJN" secondAttribute="leading" constant="47.5" id="das-g0-R3h"/>
                             <constraint firstItem="XID-7W-xWI" firstAttribute="trailing" secondItem="3R5-cw-ZJN" secondAttribute="trailing" id="fF4-CE-g7N"/>
                             <constraint firstItem="XID-7W-xWI" firstAttribute="leading" secondItem="3R5-cw-ZJN" secondAttribute="leading" id="jqI-3r-o0h"/>
                             <constraint firstItem="kiO-On-gOq" firstAttribute="bottom" secondItem="3R5-cw-ZJN" secondAttribute="bottom" id="owv-4m-Z4c"/>
@@ -263,7 +275,8 @@
                         <outlet property="lastVideoButton" destination="DJ3-Zr-2K5" id="BSA-jD-cOE"/>
                         <outlet property="nextVideoButton" destination="2ov-oz-EZV" id="e8h-gi-JfU"/>
                         <outlet property="playerView" destination="McL-d8-Bpg" id="A6k-Vz-yIY"/>
-                        <segue destination="cDW-D7-bPS" kind="show" identifier="goToAdvertisement" id="gSx-HK-Rrf"/>
+                        <outlet property="titleTagLabel" destination="YJz-av-XMA" id="VRn-8R-Lxy"/>
+                        <segue destination="cDW-D7-bPS" kind="showDetail" identifier="goToAdvertisement" action="showViewController:sender:" id="gSx-HK-Rrf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9YI-c2-nve" userLabel="First Responder" sceneMemberID="firstResponder"/>

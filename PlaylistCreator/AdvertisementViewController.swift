@@ -14,7 +14,8 @@ class AdvertisementViewController: UIViewController, GADInterstitialDelegate {
     var interstitial: GADInterstitial!
     var videos : [String]?
     var index : Int?
-
+    var tags : [String]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,6 +47,7 @@ class AdvertisementViewController: UIViewController, GADInterstitialDelegate {
             
             secondVC.videos = self.videos!
             secondVC.index = self.index
+            secondVC.tags = self.tags
             
         }
     }
