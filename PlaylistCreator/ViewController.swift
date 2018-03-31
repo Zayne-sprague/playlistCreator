@@ -10,18 +10,25 @@ import UIKit
 import Tags
 import Alamofire
 
-class ViewController: UIViewController, UITextFieldDelegate{
+class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate{
 
     @IBOutlet weak var tagTextBox: UITextField!
     
     @IBOutlet weak var tagSearchButton: UIButton!
     @IBOutlet private weak var tagsView: TagsView!
     @IBOutlet weak var loader: UIActivityIndicatorView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var videoIds : [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.contentSize = CGSize(width: 1, height: tagsView.frame.height + 300)
+        scrollView.delegate = self
+
+        //scrollView.contentInset = UIEdgeInsets(top: 0.0, left:0.0, bottom:-20.0, right:0.0)
+        
+    
         
         //UI Design for text box
         self.tagTextBox.borderStyle = .none;
@@ -47,8 +54,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
         self.tagsView.delegate = self
         
         self.tagTextBox.delegate = self
-        self.tagsView.lastTag = ""
+        self.tagsView.lastTag = "last tag afjkhawejghawekljhf"
         self.tagsView.lastTagLayerColor = .white
+        self.tagsView.lastTagTitleColor = .white
 
 
         // Do any additional setup after loading the view, typically from a nib.
@@ -78,11 +86,20 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         self.tagsView.append(self.tagTextBox.text!)
         print(self.tagsView?.tagTextArray)
-        self.tagsView.lastTag = ""
+        self.tagsView.lastTag = "last tag afjkhawejghawekljhf"
         self.tagsView.lastTagLayerColor = .white
+        self.tagsView.lastTagTitleColor = .white
+
         
         self.tagSearchButton.isEnabled = true;
         self.tagSearchButton.backgroundColor = UIColor(hex: 0x6D72C3)
+        
+        if(self.tagsView.tagArray.count < 20){
+            self.tagTextBox.placeholder = "Add another?"
+        }else{
+            self.tagTextBox.placeholder = "Whoa, too many. Delete Some Tags"
+            self.tagTextBox.isEnabled = false
+        }
         
         self.tagTextBox.text = "";
         
@@ -118,6 +135,12 @@ class ViewController: UIViewController, UITextFieldDelegate{
                 
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x > 0 {
+            scrollView.contentOffset.x = 0
+        }
+    }
 }
 
 extension ViewController: TagsDelegate{
@@ -125,12 +148,21 @@ extension ViewController: TagsDelegate{
     // Tag Touch Action
     func tagsTouchAction(_ tagsView: TagsView, tagButton: TagButton) {
         tagsView.remove(tagButton)
-        self.tagsView.lastTag = ""
+        self.tagsView.lastTag = "last tag afjkhawejghawekljhf"
         self.tagsView.lastTagLayerColor = .white
+        self.tagsView.lastTagTitleColor = .white
+
         
         if tagsView.tagArray.count <= 0{
             self.tagSearchButton.isEnabled = false;
             self.tagSearchButton.backgroundColor = UIColor.lightGray;
+            self.tagTextBox.placeholder = "Enter What You Want To Find!"
+        }
+        
+        if tagsView.tagArray.count < 20 && !self.tagTextBox.isEnabled{
+            self.tagTextBox.isEnabled = true
+            self.tagTextBox.placeholder = "Add another?"
+            
         }
 
 
