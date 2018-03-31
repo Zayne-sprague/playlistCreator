@@ -24,6 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+## Google-Mobile-Ads-SDK
+
+Copyright 2018 Google
+
 ## Tags
 
 Copyright (c) 2018 pikachu987 <pikachu77769@gmail.com>

@@ -12,7 +12,7 @@ import youtube_ios_player_helper
 class VideoController: UIViewController, YTPlayerViewDelegate {
     
     var videos : [String]?
-    var index: Int = 0
+    var index: Int?
     
     @IBOutlet weak var nextVideoButton: UIButton!
     @IBOutlet weak var lastVideoButton: UIButton!
@@ -24,13 +24,18 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
         playerView.delegate = self
         
         let playerVars = ["playsinline": 1, "autoplay": 1] // 0: will play video in fullscreen
-        self.playerView.load(withVideoId: (self.videos?[index])!, playerVars: playerVars)
+        self.playerView.load(withVideoId: (self.videos?[self.index!])!, playerVars: playerVars)
 
         self.playerView.playVideo()
         
-        if(self.videos!.count > 1){
+        if(self.videos!.count - 1 > self.index!){
             self.nextVideoButton.backgroundColor = UIColor(hex: 0x6D72C3)
             self.nextVideoButton.isEnabled = true;
+        }
+        
+        if(self.index! > 0){
+            self.lastVideoButton.backgroundColor = UIColor(hex: 0x6D72C3)
+            self.lastVideoButton.isEnabled = true;
         }
         
         // Do any additional setup after loading the view.
@@ -41,9 +46,10 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     }
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
         if(state == YTPlayerState.ended){
-            self.index += 1
-            if self.index < (self.videos!.count) {
-                playerView.load(withVideoId: (self.videos?[index])!, playerVars: ["playsinline": 1, "autoplay": 1]);
+            self.index! += 1
+            self.goToAdvertisements()
+            if self.index! < (self.videos!.count) {
+                playerView.load(withVideoId: (self.videos?[self.index!])!, playerVars: ["playsinline": 1, "autoplay": 1]);
             }
 
         }else if(state == YTPlayerState.unstarted){
@@ -56,15 +62,16 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     }
     
     @IBAction func nextVideo(_ sender: Any) {
-        self.index += 1
-        playerView.load(withVideoId: (self.videos?[index])!, playerVars: ["playsinline": 1, "autoplay": 1]);
+        self.index! += 1
+        self.goToAdvertisements()
+        playerView.load(withVideoId: (self.videos?[self.index!])!, playerVars: ["playsinline": 1, "autoplay": 1]);
         
-        if self.index >= (self.videos!.count - 1){
+        if self.index! >= (self.videos!.count - 1){
             self.nextVideoButton.isEnabled = false;
             self.nextVideoButton.backgroundColor = UIColor.lightGray;
         }
         
-        if self.index > 0 && !self.lastVideoButton.isEnabled{
+        if self.index! > 0 && !self.lastVideoButton.isEnabled{
             self.lastVideoButton.isEnabled = true;
             self.lastVideoButton.backgroundColor = UIColor(hex: 0x6D72C3)
         }
@@ -72,19 +79,35 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     
     @IBAction func lastVideo(_ sender: Any) {
         
-        self.index -= 1
-        playerView.load(withVideoId: (self.videos?[index])!, playerVars: ["playsinline": 1, "autoplay": 1]);
+        self.index! -= 1
+        playerView.load(withVideoId: (self.videos?[self.index!])!, playerVars: ["playsinline": 1, "autoplay": 1]);
         
-        if self.index <= 0{
+        if self.index! <= 0{
             self.lastVideoButton.isEnabled = false;
             self.lastVideoButton.backgroundColor = UIColor.lightGray;
         }
         
-        if self.index < self.videos!.count{
+        if self.index! < self.videos!.count{
             self.nextVideoButton.isEnabled = true;
             self.nextVideoButton.backgroundColor = UIColor(hex: 0x6D72C3)
         }
         
+    }
+    
+    func goToAdvertisements(){
+        if(self.index! != 0 && self.index! % 3 == 0){
+            performSegue(withIdentifier: "goToAdvertisement", sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "goToAdvertisement") {
+            let secondVC = segue.destination as! AdvertisementViewController
+            
+            secondVC.videos = self.videos
+            secondVC.index = self.index
+            
+        }
     }
     
     /*

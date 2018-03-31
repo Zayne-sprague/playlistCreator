@@ -246,11 +246,64 @@
                         <outlet property="lastVideoButton" destination="DJ3-Zr-2K5" id="BSA-jD-cOE"/>
                         <outlet property="nextVideoButton" destination="2ov-oz-EZV" id="e8h-gi-JfU"/>
                         <outlet property="playerView" destination="McL-d8-Bpg" id="A6k-Vz-yIY"/>
+                        <segue destination="cDW-D7-bPS" kind="show" identifier="goToAdvertisement" id="gSx-HK-Rrf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9YI-c2-nve" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="840.79999999999995" y="133.5832083958021"/>
         </scene>
+        <!--Advertisement View Controller-->
+        <scene sceneID="UHa-P1-dPI">
+            <objects>
+                <viewController id="cDW-D7-bPS" customClass="AdvertisementViewController" customModule="PlaylistCreator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oin-jw-V2G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHq-ng-SV0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time for a break?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dsp-OH-3ue">
+                                        <rect key="frame" x="54" y="68" width="267" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                        <color key="textColor" red="1" green="1" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.42745098040000001" green="0.44705882349999998" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Dsp-OH-3ue" firstAttribute="leading" secondItem="rHq-ng-SV0" secondAttribute="leading" constant="54" id="63O-UR-sZS"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dsp-OH-3ue" secondAttribute="trailing" constant="54" id="H4t-Us-TOD"/>
+                                    <constraint firstAttribute="width" constant="375" id="n4D-6c-q4U"/>
+                                    <constraint firstItem="Dsp-OH-3ue" firstAttribute="top" secondItem="rHq-ng-SV0" secondAttribute="top" constant="68" id="qOp-mk-nTL"/>
+                                </constraints>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="EqA-3Z-S3V">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rHq-ng-SV0" firstAttribute="leading" secondItem="CS4-16-eTr" secondAttribute="leading" id="HC4-xR-uj0"/>
+                            <constraint firstItem="EqA-3Z-S3V" firstAttribute="centerY" secondItem="oin-jw-V2G" secondAttribute="centerY" id="Z5V-lY-gte"/>
+                            <constraint firstAttribute="bottom" secondItem="rHq-ng-SV0" secondAttribute="bottom" constant="517" id="dZp-6e-8ri"/>
+                            <constraint firstItem="rHq-ng-SV0" firstAttribute="top" secondItem="oin-jw-V2G" secondAttribute="top" id="eu9-Ww-R0p"/>
+                            <constraint firstItem="EqA-3Z-S3V" firstAttribute="centerX" secondItem="oin-jw-V2G" secondAttribute="centerX" id="fJD-qs-iqs"/>
+                            <constraint firstItem="rHq-ng-SV0" firstAttribute="trailing" secondItem="CS4-16-eTr" secondAttribute="trailing" id="nWF-Y2-wgh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CS4-16-eTr"/>
+                    </view>
+                    <connections>
+                        <segue destination="3Xm-zc-YsK" kind="show" identifier="goToVideos" id="RaN-wX-7D3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r9s-zT-0YG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1559" y="134"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="RaN-wX-7D3"/>
+    </inferredMetricsTieBreakers>
 </document>

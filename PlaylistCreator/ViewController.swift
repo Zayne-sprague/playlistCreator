@@ -64,6 +64,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
             let secondVC = segue.destination as! VideoController
            
             secondVC.videos = self.videoIds!
+            secondVC.index = 0
         }
     }
     

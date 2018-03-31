@@ -9,4 +9,5 @@ target 'PlaylistCreator' do
   pod 'youtube-ios-player-helper'
   pod 'Tags'
   pod 'Alamofire', '~> 4.7'
+  pod 'Google-Mobile-Ads-SDK'
 end
