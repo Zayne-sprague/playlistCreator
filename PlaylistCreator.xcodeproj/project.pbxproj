@@ -19,6 +19,7 @@
 		42E5BD5320704BA00052A01C /* PreviousSaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E5BD5220704BA00052A01C /* PreviousSaveViewController.swift */; };
 		42E5BD5B207050C70052A01C /* PreviousSaveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E5BD59207050C70052A01C /* PreviousSaveCell.swift */; };
 		42E5BD5C207050C70052A01C /* PreviousSaveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42E5BD5A207050C70052A01C /* PreviousSaveCell.xib */; };
+		42E5BD60207066FB0052A01C /* LoadPreviousViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E5BD5F207066FB0052A01C /* LoadPreviousViewController.swift */; };
 		DF0CC78DF26DA1C923609513 /* Pods_PlaylistCreator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD37227EBC765BAED7B6C8C8 /* Pods_PlaylistCreator.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		42E5BD5220704BA00052A01C /* PreviousSaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousSaveViewController.swift; sourceTree = "<group>"; };
 		42E5BD59207050C70052A01C /* PreviousSaveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousSaveCell.swift; sourceTree = "<group>"; };
 		42E5BD5A207050C70052A01C /* PreviousSaveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviousSaveCell.xib; sourceTree = "<group>"; };
+		42E5BD5F207066FB0052A01C /* LoadPreviousViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPreviousViewController.swift; sourceTree = "<group>"; };
 		AD37227EBC765BAED7B6C8C8 /* Pods_PlaylistCreator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlaylistCreator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -71,6 +73,7 @@
 				4254CDAB2070442B00519B4B /* SavesViewController.swift */,
 				4254CDAD2070443700519B4B /* NewSaveViewController.swift */,
 				42E5BD5220704BA00052A01C /* PreviousSaveViewController.swift */,
+				42E5BD5F207066FB0052A01C /* LoadPreviousViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				42E5BD5320704BA00052A01C /* PreviousSaveViewController.swift in Sources */,
 				425A88A62056149B00E3311B /* ViewController.swift in Sources */,
 				4254CDAC2070442B00519B4B /* SavesViewController.swift in Sources */,
+				42E5BD60207066FB0052A01C /* LoadPreviousViewController.swift in Sources */,
 				425A88B620561FAE00E3311B /* VideoController.swift in Sources */,
 				42E5BD5B207050C70052A01C /* PreviousSaveCell.swift in Sources */,
 				4254CDA7206F1E4E00519B4B /* AdvertisementViewController.swift in Sources */,

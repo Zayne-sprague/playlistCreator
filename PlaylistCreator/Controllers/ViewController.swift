@@ -14,7 +14,11 @@ protocol clearCurrentSearch {
     func clearCurrentSearch()
 }
 
-class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, clearCurrentSearch{
+protocol createCurrentSearch{
+    func createCurrentSearch(tags: [String])
+}
+
+class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, clearCurrentSearch, createCurrentSearch{
 
     @IBOutlet weak var tagTextBox: UITextField!
     
@@ -73,6 +77,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         self.tagSearchButton.backgroundColor = UIColor.lightGray;
     }
     
+    func createCurrentSearch(tags: [String]) {
+        self.tagsView.removeAll()
+        for tag in tags{
+            self.tagsView.append(tag)
+        }
+        if (tags.count < 20){
+            self.tagTextBox.placeholder = "Load extra tags!"
+        }else{
+            self.tagTextBox.placeholder = "Whoa, too many. Delete Some Tags"
+        }
+        self.tagSearchButton.isEnabled = true
+        self.tagSearchButton.backgroundColor = UIColor(hex: 0x6D72C3)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -88,6 +106,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             secondVC.tags = self.tagsView.tagTextArray
             
             secondVC.clearDelegate = self
+        }else if segue.identifier=="goToLoading"{
+            let secondVC = segue.destination as! LoadPreviousViewController
+            
+            secondVC.delegate = self
         }
     }
     
@@ -155,6 +177,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         if scrollView.contentOffset.x > 0 {
             scrollView.contentOffset.x = 0
         }
+    }
+    @IBAction func loadSaveButtonPress(_ sender: Any) {
+        performSegue(withIdentifier: "goToLoading", sender: nil)
     }
 }
 
