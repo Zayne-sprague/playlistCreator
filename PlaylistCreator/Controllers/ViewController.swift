@@ -10,7 +10,11 @@ import UIKit
 import Tags
 import Alamofire
 
-class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate{
+protocol clearCurrentSearch {
+    func clearCurrentSearch()
+}
+
+class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, clearCurrentSearch{
 
     @IBOutlet weak var tagTextBox: UITextField!
     
@@ -61,6 +65,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
 
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    func clearCurrentSearch() {
+        self.tagsView.removeAll()
+        self.tagTextBox.placeholder = "Enter What You Want To Find!"
+        self.tagSearchButton.isEnabled = false
+        self.tagSearchButton.backgroundColor = UIColor.lightGray;
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -74,6 +86,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             secondVC.videos = self.videoIds!
             secondVC.index = 0
             secondVC.tags = self.tagsView.tagTextArray
+            
+            secondVC.clearDelegate = self
         }
     }
     

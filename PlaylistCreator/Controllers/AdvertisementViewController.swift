@@ -12,9 +12,6 @@ import UIKit
 class AdvertisementViewController: UIViewController, GADInterstitialDelegate {
     
     var interstitial: GADInterstitial!
-    var videos : [String]?
-    var index : Int?
-    var tags : [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,19 +35,9 @@ class AdvertisementViewController: UIViewController, GADInterstitialDelegate {
     }
     
     func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-        performSegue(withIdentifier: "goToVideos", sender: nil)
+        self.dismiss(animated: true, completion: {print("dismissed advertisements controller")})
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier=="goToVideos"{
-            let secondVC = segue.destination as! VideoController
-            
-            secondVC.videos = self.videos!
-            secondVC.index = self.index
-            secondVC.tags = self.tags
-            
-        }
-    }
 
     /*
     // MARK: - Navigation

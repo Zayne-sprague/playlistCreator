@@ -15,6 +15,8 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     var index: Int?
     var tags: [String]?
     
+    var clearDelegate : clearCurrentSearch?
+    
     @IBOutlet weak var nextVideoButton: UIButton!
     @IBOutlet weak var lastVideoButton: UIButton!
     
@@ -66,6 +68,10 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func backButtonPress(_ sender: Any) {
+        self.clearDelegate?.clearCurrentSearch()
+        self.dismiss(animated: true, completion: {print("dismissed video controller")})
+    }
     
     @IBAction func nextVideo(_ sender: Any) {
         self.index! += 1
@@ -109,24 +115,24 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
         }
     }
     
+    @IBAction func saveSearchButtonPress(_ sender: Any) {
+        self.playerView.pauseVideo()
+        performSegue(withIdentifier: "goToSave", sender: nil)
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "goToAdvertisement") {
-            let secondVC = segue.destination as! AdvertisementViewController
+        if(segue.identifier == "goToSave"){
+            let secondVC = segue.destination as! SavesViewController
             
             secondVC.videos = self.videos
             secondVC.index = self.index
             secondVC.tags = self.tags
+            
         }
     }
     
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
