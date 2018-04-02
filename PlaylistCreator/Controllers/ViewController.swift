@@ -173,8 +173,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         self.tagSearchButton.backgroundColor = UIColor.lightGray;
         
         self.loader.startAnimating();
-        
-        Alamofire.request("http://localhost:8090/youtube_data", method: .post, parameters: ["topics": self.tagsView.tagTextArray, "filters":["likes": "most"]], encoding: JSONEncoding.default)
+        var local_url = "http://localhost:8090/youtube_data"
+        var temp_url = "https://tempory_url.ngrok.io/youtube_data"
+        Alamofire.request(temp_url, method: .post, parameters: ["topics": self.tagsView.tagTextArray, "filters":["likes": "most"]], encoding: JSONEncoding.default)
             .responseJSON { response in
                 
                 self.tagSearchButton.isEnabled = true;
