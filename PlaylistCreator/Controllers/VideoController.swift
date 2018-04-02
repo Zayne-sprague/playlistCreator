@@ -16,6 +16,7 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     var tags: [String]?
     
     var clearDelegate : clearCurrentSearch?
+    var checkSavesDelegate: checkSaves?
     
     @IBOutlet weak var nextVideoButton: UIButton!
     @IBOutlet weak var lastVideoButton: UIButton!
@@ -70,6 +71,7 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     }
     @IBAction func backButtonPress(_ sender: Any) {
         self.clearDelegate?.clearCurrentSearch()
+        self.checkSavesDelegate?.checkSaves()
         self.dismiss(animated: true, completion: {print("dismissed video controller")})
     }
     
@@ -116,7 +118,6 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     }
     
     @IBAction func saveSearchButtonPress(_ sender: Any) {
-        self.playerView.pauseVideo()
         performSegue(withIdentifier: "goToSave", sender: nil)
     }
     

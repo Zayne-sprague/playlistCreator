@@ -18,7 +18,11 @@ protocol createCurrentSearch{
     func createCurrentSearch(tags: [String])
 }
 
-class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, clearCurrentSearch, createCurrentSearch{
+protocol checkSaves{
+    func checkSaves()
+}
+
+class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate, clearCurrentSearch, createCurrentSearch, checkSaves{
 
     @IBOutlet weak var tagTextBox: UITextField!
     
@@ -26,17 +30,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     @IBOutlet private weak var tagsView: TagsView!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var loadSearchButton: UIButton!
     
     var videoIds : [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.checkSaves()
+        
+        //Scroll view styles
         scrollView.contentSize = CGSize(width: 1, height: tagsView.frame.height + 300)
         scrollView.delegate = self
-
-        //scrollView.contentInset = UIEdgeInsets(top: 0.0, left:0.0, bottom:-20.0, right:0.0)
-        
-    
         
         //UI Design for text box
         self.tagTextBox.borderStyle = .none;
@@ -78,17 +83,35 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
     }
     
     func createCurrentSearch(tags: [String]) {
-        self.tagsView.removeAll()
-        for tag in tags{
-            self.tagsView.append(tag)
+        if (tags.count > 0){
+
+            self.tagsView.removeAll()
+
+            for tag in tags{
+                self.tagsView.append(tag)
+            }
+            if (tags.count < 20){
+                self.tagTextBox.placeholder = "Load extra tags!"
+            }else{
+                self.tagTextBox.placeholder = "Whoa, too many. Delete Some Tags"
+            }
+            
+            self.tagSearchButton.isEnabled = true
+            self.tagSearchButton.backgroundColor = UIColor(hex: 0x6D72C3)
         }
-        if (tags.count < 20){
-            self.tagTextBox.placeholder = "Load extra tags!"
+    }
+    
+    func checkSaves(){
+        //Checks & Load button styles
+        var saves = UserDefaults.standard.object(forKey: "savedSearches") as? [[String: Any]]
+        if saves != nil && saves!.count > 0{
+            self.loadSearchButton.isEnabled = true
+            self.loadSearchButton.isHidden = false
         }else{
-            self.tagTextBox.placeholder = "Whoa, too many. Delete Some Tags"
+            self.loadSearchButton.isEnabled = false
+            self.loadSearchButton.isHidden = true
         }
-        self.tagSearchButton.isEnabled = true
-        self.tagSearchButton.backgroundColor = UIColor(hex: 0x6D72C3)
+        
     }
     
 
@@ -106,10 +129,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
             secondVC.tags = self.tagsView.tagTextArray
             
             secondVC.clearDelegate = self
+            secondVC.checkSavesDelegate = self
         }else if segue.identifier=="goToLoading"{
             let secondVC = segue.destination as! LoadPreviousViewController
             
             secondVC.delegate = self
+            secondVC.checkSavesDelegate = self
         }
     }
     
@@ -243,4 +268,35 @@ extension UIColor {
         self.init(red: components.R, green: components.G, blue: components.B, alpha: 1)
     }
     
+}
+
+private var __maxLengths = [UITextField: Int]()
+extension UITextField {
+    @IBInspectable var maxLength: Int {
+        get {
+            guard let l = __maxLengths[self] else {
+                return 150 // (global default-limit. or just, Int.max)
+            }
+            return l
+        }
+        set {
+            __maxLengths[self] = newValue
+            addTarget(self, action: #selector(fix), for: .editingChanged)
+            
+        }
+    }
+    @objc func fix(textField: UITextField) {
+        let t = textField.text
+        textField.text = t?.safelyLimitedTo(length: maxLength)
+    }
+}
+
+extension String
+{
+    func safelyLimitedTo(length n: Int)->String {
+        if (self.count <= n) {
+            return self
+        }
+        return String( Array(self).prefix(upTo: n) )
+    }
 }

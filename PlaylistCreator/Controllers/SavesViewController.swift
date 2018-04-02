@@ -19,12 +19,20 @@ class SavesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var psTags: [String] = []
     var psName: String = ""
     var psDesc: String = ""
+    
+    var psIndex: Int?
 
     @IBOutlet weak var savesTable: UITableView!
+    @IBOutlet weak var newSaveButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.saves = UserDefaults.standard.object(forKey: "savedSearches") as? [[String : Any]]
+        
+        if(self.saves != nil && self.saves!.count >= 20){
+            self.newSaveButton.isEnabled = false
+            self.newSaveButton.backgroundColor = UIColor.lightGray
+        }
         
         self.savesTable.delegate = self
         self.savesTable.dataSource = self
@@ -56,6 +64,11 @@ class SavesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func updateSaveTable() {
         self.saves = UserDefaults.standard.object(forKey: "savedSearches") as? [[String : Any]]
         
+        if(self.saves != nil && self.saves!.count < 20 && !self.newSaveButton.isEnabled){
+            self.newSaveButton.isEnabled = true
+            self.newSaveButton.backgroundColor = UIColor(hex: 0x6D72C3)
+        }
+        
         self.savesTable.reloadData()
     }
 
@@ -78,6 +91,7 @@ class SavesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.psName = data["name"] as! String
         self.psTags = data["tags"] as! [String]
         self.psDesc = data["description"] as! String
+        self.psIndex = indexPath.row
         
         performSegue(withIdentifier: "goToPreviousSave", sender: nil)
     }
@@ -98,6 +112,9 @@ class SavesViewController: UIViewController, UITableViewDelegate, UITableViewDat
             secondVC.tags = self.tags
             secondVC.index = self.index
             secondVC.videos = self.videos
+            
+            secondVC.saves = self.saves
+            secondVC.savesIndex = self.psIndex
             
             secondVC.previousSaveTitle = self.psName
             secondVC.previousSaveTags = self.psTags

@@ -12,7 +12,7 @@ protocol updateSaveTable {
     func updateSaveTable()
 }
 
-class NewSaveViewController: UIViewController {
+class NewSaveViewController: UIViewController, UITextViewDelegate {
     
     var tags : [String]?
     var index: Int?
@@ -26,6 +26,8 @@ class NewSaveViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.searchDescriptionBox.delegate = self
         
         //UI Design for text box
         self.searchNameTextBox.borderStyle = .none;
@@ -84,6 +86,12 @@ class NewSaveViewController: UIViewController {
         self.dismiss(animated: true, completion: {print("dismissed new save controller")})
 
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        return newText.count <= 200
+    }
+    
     @IBAction func backButtonPress(_ sender: Any) {
         self._dismiss()
 
