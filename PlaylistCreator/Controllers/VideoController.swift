@@ -8,6 +8,7 @@
 
 import UIKit
 import youtube_ios_player_helper
+import Alamofire
 
 class VideoController: UIViewController, YTPlayerViewDelegate {
     
@@ -24,9 +25,15 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     @IBOutlet weak var titleTagLabel: UILabel!
     @IBOutlet weak var playerView: YTPlayerView!
 
+    @IBOutlet weak var showSimilarVideosButton: UIButton!
+    @IBOutlet weak var similarVideosLoader: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         playerView.delegate = self
+        
+        self.similarVideosLoader.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.similarVideosLoader.isHidden = true
         
         let playerVars = ["playsinline": 1, "autoplay": 1] // 0: will play video in fullscreen
         self.playerView.load(withVideoId: (self.videos?[self.index!])!, playerVars: playerVars)
@@ -133,7 +140,36 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
         }
     }
     
-
+    @IBAction func showSimilarVideosButtonPress(_ sender: Any) {
+        self.showSimilarVideosButton.isEnabled = true
+        self.showSimilarVideosButton.isHidden = true
+        
+        self.similarVideosLoader.isHidden = false
+        self.similarVideosLoader.startAnimating()
+        
+        var local_url = "http://localhost:8090/youtube_showmore"
+        var temp_url = "https://tempory_url.ngrok.io/youtube_showmore"
+        Alamofire.request(temp_url, method: .post, parameters: ["topics": self.tags![self.index!], "filters":["likes": "most"]], encoding: JSONEncoding.default)
+            .responseJSON { response in
+                
+                self.similarVideosLoader.stopAnimating()
+                self.similarVideosLoader.isHidden = true
+                
+                
+                guard let json = response.result.value as? [String: Any] else {
+                    print("didn't get todo object as JSON from API")
+                    print("Error: \(response.result.error)")
+                    return
+                }
+                
+                if let vidIds = json["result"] as? [String] {
+                    print(vidIds)
+                }
+                
+        }
+        
+    }
+    
     
 
 }

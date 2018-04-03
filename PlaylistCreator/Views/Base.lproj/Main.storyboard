@@ -291,21 +291,56 @@
                                 <color key="textColor" red="1" green="1" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mSh-es-HNP">
+                                <rect key="frame" x="48" y="483" width="279" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="q3Q-vd-G60"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Show Similar Videos?">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="showSimilarVideosButtonPress:" destination="3Xm-zc-YsK" eventType="touchUpInside" id="Xjw-YG-mFL"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="aOT-jI-ouP">
+                                <rect key="frame" x="177" y="490" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.42745098040000001" green="0.44705882349999998" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="3R5-cw-ZJN" firstAttribute="trailing" secondItem="mSh-es-HNP" secondAttribute="trailing" constant="48" id="9sp-3w-s71"/>
                             <constraint firstItem="3R5-cw-ZJN" firstAttribute="trailing" secondItem="McL-d8-Bpg" secondAttribute="trailing" constant="16" id="BPO-ea-bmo"/>
+                            <constraint firstItem="mSh-es-HNP" firstAttribute="top" secondItem="McL-d8-Bpg" secondAttribute="bottom" constant="40" id="Gvy-Y7-m2x"/>
+                            <constraint firstItem="3R5-cw-ZJN" firstAttribute="trailing" secondItem="aOT-jI-ouP" secondAttribute="trailing" constant="178" id="POE-mP-lPf"/>
                             <constraint firstItem="3R5-cw-ZJN" firstAttribute="trailing" secondItem="YJz-av-XMA" secondAttribute="trailing" constant="47.5" id="XbP-DY-rZf"/>
                             <constraint firstItem="kiO-On-gOq" firstAttribute="leading" secondItem="3R5-cw-ZJN" secondAttribute="leading" id="ZVH-hN-Sct"/>
                             <constraint firstItem="McL-d8-Bpg" firstAttribute="top" secondItem="YJz-av-XMA" secondAttribute="bottom" constant="20" id="cfJ-u4-aBR"/>
+                            <constraint firstItem="kiO-On-gOq" firstAttribute="top" secondItem="aOT-jI-ouP" secondAttribute="bottom" constant="87" id="cmU-tu-EuS"/>
                             <constraint firstItem="XID-7W-xWI" firstAttribute="top" secondItem="qYU-aC-4GR" secondAttribute="top" id="dad-gj-KGh"/>
                             <constraint firstItem="YJz-av-XMA" firstAttribute="leading" secondItem="3R5-cw-ZJN" secondAttribute="leading" constant="47.5" id="das-g0-R3h"/>
+                            <constraint firstItem="mSh-es-HNP" firstAttribute="leading" secondItem="3R5-cw-ZJN" secondAttribute="leading" constant="48" id="euV-Cw-a23"/>
                             <constraint firstItem="XID-7W-xWI" firstAttribute="trailing" secondItem="3R5-cw-ZJN" secondAttribute="trailing" id="fF4-CE-g7N"/>
+                            <constraint firstItem="aOT-jI-ouP" firstAttribute="top" secondItem="McL-d8-Bpg" secondAttribute="bottom" constant="47" id="g9k-Tp-3j8"/>
                             <constraint firstItem="XID-7W-xWI" firstAttribute="leading" secondItem="3R5-cw-ZJN" secondAttribute="leading" id="jqI-3r-o0h"/>
                             <constraint firstItem="kiO-On-gOq" firstAttribute="bottom" secondItem="3R5-cw-ZJN" secondAttribute="bottom" id="owv-4m-Z4c"/>
                             <constraint firstItem="McL-d8-Bpg" firstAttribute="centerY" secondItem="qYU-aC-4GR" secondAttribute="centerY" id="pqy-BF-Jt9"/>
                             <constraint firstItem="kiO-On-gOq" firstAttribute="trailing" secondItem="3R5-cw-ZJN" secondAttribute="trailing" id="qdL-A6-SDf"/>
                             <constraint firstItem="McL-d8-Bpg" firstAttribute="leading" secondItem="3R5-cw-ZJN" secondAttribute="leading" constant="16" id="w1X-bF-dMc"/>
+                            <constraint firstItem="aOT-jI-ouP" firstAttribute="leading" secondItem="3R5-cw-ZJN" secondAttribute="leading" constant="177" id="wpA-pe-yhG"/>
+                            <constraint firstItem="kiO-On-gOq" firstAttribute="top" secondItem="mSh-es-HNP" secondAttribute="bottom" constant="80" id="xWb-Ee-iI2"/>
                             <constraint firstItem="McL-d8-Bpg" firstAttribute="centerX" secondItem="qYU-aC-4GR" secondAttribute="centerX" id="yZ6-s6-NiA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3R5-cw-ZJN"/>
@@ -314,6 +349,8 @@
                         <outlet property="lastVideoButton" destination="DJ3-Zr-2K5" id="BSA-jD-cOE"/>
                         <outlet property="nextVideoButton" destination="2ov-oz-EZV" id="e8h-gi-JfU"/>
                         <outlet property="playerView" destination="McL-d8-Bpg" id="A6k-Vz-yIY"/>
+                        <outlet property="showSimilarVideosButton" destination="mSh-es-HNP" id="mXL-aO-E7F"/>
+                        <outlet property="similarVideosLoader" destination="aOT-jI-ouP" id="O98-gk-e6h"/>
                         <outlet property="titleTagLabel" destination="YJz-av-XMA" id="VRn-8R-Lxy"/>
                         <segue destination="cDW-D7-bPS" kind="showDetail" identifier="goToAdvertisement" action="showViewController:sender:" id="gSx-HK-Rrf"/>
                         <segue destination="Qso-8A-ixd" kind="show" identifier="goToSave" id="z6E-nF-yVe"/>
