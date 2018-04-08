@@ -12,7 +12,7 @@ protocol updateSaveTable {
     func updateSaveTable()
 }
 
-class NewSaveViewController: UIViewController, UITextViewDelegate {
+class NewSaveViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     var tags : [String]?
     var index: Int?
@@ -28,6 +28,7 @@ class NewSaveViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         self.searchDescriptionBox.delegate = self
+        self.searchNameTextBox.delegate = self
         
         //UI Design for text box
         self.searchNameTextBox.borderStyle = .none;
@@ -97,6 +98,9 @@ class NewSaveViewController: UIViewController, UITextViewDelegate {
 
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "goToVideos") {
             let secondVC = segue.destination as! VideoController

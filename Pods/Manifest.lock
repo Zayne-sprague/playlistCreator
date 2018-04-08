@@ -1,21 +1,28 @@
 PODS:
   - Alamofire (4.7.0)
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
+  - Fabric (1.7.6)
   - Google-Mobile-Ads-SDK (7.30.0)
   - Tags (0.1.4)
   - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - Crashlytics
+  - Fabric
   - Google-Mobile-Ads-SDK
   - Tags
   - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   Google-Mobile-Ads-SDK: 7404f68120ae8682afeb5af001fbf4aad731c78e
   Tags: b18378f79d8b30c40d4b7ae4d5edfc478434d858
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: fc0b81a24760b0e2664503fa37a8fe3999cf83ef
+PODFILE CHECKSUM: c704f6f73c7af04bf8fe9b366e1ca26ff14bedc2
 
 COCOAPODS: 1.3.1

@@ -173,7 +173,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
         self.tagSearchButton.backgroundColor = UIColor.lightGray;
         
         self.loader.startAnimating();
-        var local_url = "http://localhost:8090/youtube_data"
+        /*var local_url = "http://localhost:8090/youtube_data"
         var temp_url = "https://tempory_url.ngrok.io/youtube_data"
         Alamofire.request(temp_url, method: .post, parameters: ["topics": self.tagsView.tagTextArray, "filters":["likes": "most"]], encoding: JSONEncoding.default)
             .responseJSON { response in
@@ -196,7 +196,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegat
                     self.tagsView.removeAll()
                 }
                 
-        }
+        }*/
+        var ids = find_videos_for_tags(tags: self.tagsView.tagTextArray, filters: ["likes": "most"], handler: {
+            ids in
+            self.videoIds = ids
+            self.performSegue(withIdentifier: "goToVideos", sender: nil)
+            //self.tagsView.removeAll()
+            self.loader.stopAnimating();
+        })
+        
+
+
+
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

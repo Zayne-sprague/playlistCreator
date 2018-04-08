@@ -10,4 +10,6 @@ target 'PlaylistCreator' do
   pod 'Tags'
   pod 'Alamofire', '~> 4.7'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'Fabric'
+  pod 'Crashlytics'
 end
