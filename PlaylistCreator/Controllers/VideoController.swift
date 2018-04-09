@@ -10,11 +10,13 @@ import UIKit
 import youtube_ios_player_helper
 import Alamofire
 
-class VideoController: UIViewController, YTPlayerViewDelegate {
+class VideoController: UIViewController, YTPlayerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource{
+
     
     var videos : [String]?
     var index: Int?
     var tags: [String]?
+    var thumbnailUrls: [[String: Any]] = []
     
     var clearDelegate : clearCurrentSearch?
     var checkSavesDelegate: checkSaves?
@@ -27,10 +29,13 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
 
     @IBOutlet weak var showSimilarVideosButton: UIButton!
     @IBOutlet weak var similarVideosLoader: UIActivityIndicatorView!
-    
+    @IBOutlet weak var similar_video_collection: UICollectionView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         playerView.delegate = self
+        self.similar_video_collection.delegate = self
+        self.similar_video_collection.dataSource = self
         
         self.similarVideosLoader.transform = CGAffineTransform(scaleX: 1, y: 1)
         self.similarVideosLoader.isHidden = true
@@ -141,13 +146,13 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
     }
     
     @IBAction func showSimilarVideosButtonPress(_ sender: Any) {
-        self.showSimilarVideosButton.isEnabled = true
+        self.showSimilarVideosButton.isEnabled = false
         self.showSimilarVideosButton.isHidden = true
         
         self.similarVideosLoader.isHidden = false
         self.similarVideosLoader.startAnimating()
         
-        var local_url = "http://localhost:8090/youtube_showmore"
+        /* var local_url = "http://localhost:8090/youtube_showmore"
         var temp_url = "https://tempory_url.ngrok.io/youtube_showmore"
         Alamofire.request(temp_url, method: .post, parameters: ["topics": self.tags![self.index!], "filters":["likes": "most"]], encoding: JSONEncoding.default)
             .responseJSON { response in
@@ -166,10 +171,62 @@ class VideoController: UIViewController, YTPlayerViewDelegate {
                     print(vidIds)
                 }
                 
+        }*/
+        
+        find_similar_videos_to_tag(tag: self.tags![self.index!], filters: ["likes": "most"]) { (ids) in
+            
+            self.similar_video_collection.isHidden = false
+        
+            self.thumbnailUrls = []
+            for id in ids{
+                var url : URL = URL(string: "https://img.youtube.com/vi/\(id)/default.jpg")!
+                DispatchQueue.global(qos: .userInitiated).async {
+                    
+                    let imageData:NSData = NSData(contentsOf: url)!
+                    
+                    DispatchQueue.main.async {
+                        let image = UIImage(data: imageData as Data)
+                        self.thumbnailUrls.append(["id": id, "image": image!])
+                        
+                        self.similar_video_collection.reloadData()
+                        
+                        
+                    }
+                }
+                
+            }
+            
+            self.similarVideosLoader.isHidden = true
+            self.similarVideosLoader.stopAnimating()
+            
         }
+        
+        
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.thumbnailUrls.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SimilarThumbnailCell", for: indexPath) as! ThumbNailImageCell
+        
+        var cell_data = self.thumbnailUrls[indexPath.row]
+        cell.thumbnailImage.image = cell_data["image"] as! UIImage
+        cell.tag_id = cell_data["id"] as! String
+        
+        return cell
+        
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var cell = collectionView.cellForItem(at: indexPath) as! ThumbNailImageCell
+        playerView.load(withVideoId: cell.tag_id!, playerVars: ["playsinline": 1, "autoplay": 1]);
+    }
+    
+
     
 
 }

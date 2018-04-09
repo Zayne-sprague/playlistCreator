@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -318,6 +313,41 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="aOT-jI-ouP">
                                 <rect key="frame" x="177" y="490" width="20" height="20"/>
                             </activityIndicatorView>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dcv-X4-tIb">
+                                <rect key="frame" x="16" y="451" width="343" height="138"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.42745098039215684" green="0.44705882352941173" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Aox-4Q-40F">
+                                    <size key="itemSize" width="132" height="139"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SimilarThumbnailCell" id="Xcy-uY-eeU" customClass="ThumbNailImageCell" customModule="PlaylistCreator" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="-0.5" width="132" height="139"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="132" height="139"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0h6-OJ-mYl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="132" height="139"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="0h6-OJ-mYl" firstAttribute="leading" secondItem="Xcy-uY-eeU" secondAttribute="leading" id="3eu-a0-fMR"/>
+                                            <constraint firstAttribute="bottom" secondItem="0h6-OJ-mYl" secondAttribute="bottom" id="4pe-3j-Cc9"/>
+                                            <constraint firstAttribute="trailing" secondItem="0h6-OJ-mYl" secondAttribute="trailing" id="66U-OX-4Il"/>
+                                            <constraint firstItem="0h6-OJ-mYl" firstAttribute="top" secondItem="Xcy-uY-eeU" secondAttribute="top" id="r65-iZ-uLm"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="thumbnailImage" destination="0h6-OJ-mYl" id="Shg-Gr-dJm"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.42745098040000001" green="0.44705882349999998" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -351,8 +381,9 @@
                         <outlet property="playerView" destination="McL-d8-Bpg" id="A6k-Vz-yIY"/>
                         <outlet property="showSimilarVideosButton" destination="mSh-es-HNP" id="mXL-aO-E7F"/>
                         <outlet property="similarVideosLoader" destination="aOT-jI-ouP" id="O98-gk-e6h"/>
+                        <outlet property="similar_video_collection" destination="dcv-X4-tIb" id="suh-MZ-9e4"/>
                         <outlet property="titleTagLabel" destination="YJz-av-XMA" id="VRn-8R-Lxy"/>
-                        <segue destination="cDW-D7-bPS" kind="showDetail" identifier="goToAdvertisement" action="showViewController:sender:" id="gSx-HK-Rrf"/>
+                        <segue destination="cDW-D7-bPS" kind="showDetail" identifier="goToAdvertisement" id="gSx-HK-Rrf"/>
                         <segue destination="Qso-8A-ixd" kind="show" identifier="goToSave" id="z6E-nF-yVe"/>
                     </connections>
                 </viewController>

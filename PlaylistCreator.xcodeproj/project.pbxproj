@@ -18,6 +18,7 @@
 		425A88B620561FAE00E3311B /* VideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425A88B520561FAE00E3311B /* VideoController.swift */; };
 		42862E822079725D00F37B48 /* youtube_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42862E812079725D00F37B48 /* youtube_data.swift */; };
 		42862E842079902100F37B48 /* alamo_call.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42862E832079902100F37B48 /* alamo_call.swift */; };
+		42862E8C207B173800F37B48 /* ThumbNailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42862E8B207B173800F37B48 /* ThumbNailImageCell.swift */; };
 		42E5BD5320704BA00052A01C /* PreviousSaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E5BD5220704BA00052A01C /* PreviousSaveViewController.swift */; };
 		42E5BD5B207050C70052A01C /* PreviousSaveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E5BD59207050C70052A01C /* PreviousSaveCell.swift */; };
 		42E5BD5C207050C70052A01C /* PreviousSaveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42E5BD5A207050C70052A01C /* PreviousSaveCell.xib */; };
@@ -41,6 +42,7 @@
 		425A88B520561FAE00E3311B /* VideoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoController.swift; sourceTree = "<group>"; };
 		42862E812079725D00F37B48 /* youtube_data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = youtube_data.swift; sourceTree = "<group>"; };
 		42862E832079902100F37B48 /* alamo_call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alamo_call.swift; sourceTree = "<group>"; };
+		42862E8B207B173800F37B48 /* ThumbNailImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbNailImageCell.swift; sourceTree = "<group>"; };
 		42E5BD5220704BA00052A01C /* PreviousSaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousSaveViewController.swift; sourceTree = "<group>"; };
 		42E5BD59207050C70052A01C /* PreviousSaveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousSaveCell.swift; sourceTree = "<group>"; };
 		42E5BD5A207050C70052A01C /* PreviousSaveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviousSaveCell.xib; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				42E5BD59207050C70052A01C /* PreviousSaveCell.swift */,
 				42E5BD5A207050C70052A01C /* PreviousSaveCell.xib */,
+				42862E8B207B173800F37B48 /* ThumbNailImageCell.swift */,
 			);
 			name = CustomXIBS;
 			path = "New Group";
@@ -204,7 +207,7 @@
 				TargetAttributes = {
 					425A889F2056149A00E3311B = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 0;
@@ -297,7 +300,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" ec81bc35a19a86cf1564f58418af54dd1832eaae bfec5665ae8ee3ddb5f5cd6c67c3f3afd312effac4d571d967a72e2cfdd9b981";
+			shellScript = "./Fabric.framework/run ec81bc35a19a86cf1564f58418af54dd1832eaae bfec5665ae8ee3ddb5f5cd6c67c3f3afd312effac4d571d967a72e2cfdd9b981";
 		};
 		D2947CB21DD4941AEFA90E22 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -327,6 +330,7 @@
 				42862E822079725D00F37B48 /* youtube_data.swift in Sources */,
 				4254CDAC2070442B00519B4B /* SavesViewController.swift in Sources */,
 				42862E842079902100F37B48 /* alamo_call.swift in Sources */,
+				42862E8C207B173800F37B48 /* ThumbNailImageCell.swift in Sources */,
 				42E5BD60207066FB0052A01C /* LoadPreviousViewController.swift in Sources */,
 				425A88B620561FAE00E3311B /* VideoController.swift in Sources */,
 				42E5BD5B207050C70052A01C /* PreviousSaveCell.swift in Sources */,
@@ -468,8 +472,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0A4172CBE14F720C17B9F2D3 /* Pods-PlaylistCreator.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FR635QXUDQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -478,10 +483,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/PlaylistCreator/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ZayneSprague.PlaylistCreator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZayneSprague.SoundScaping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b5158336-f194-458e-bcb5-e2b2eedd26dd";
-				PROVISIONING_PROFILE_SPECIFIER = PlayList;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -491,8 +496,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1308AECE720874B6AA1339D3 /* Pods-PlaylistCreator.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FR635QXUDQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -501,10 +507,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/PlaylistCreator/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ZayneSprague.PlaylistCreator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZayneSprague.SoundScaping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b5158336-f194-458e-bcb5-e2b2eedd26dd";
-				PROVISIONING_PROFILE_SPECIFIER = PlayList;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

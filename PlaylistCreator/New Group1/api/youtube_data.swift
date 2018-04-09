@@ -27,6 +27,11 @@ func find_videos_for_tags(tags: [String] , filters: [String:Any], handler: @esca
     locate_based_on_topics(tags: tags, filters: filters, ids: [], count: 1, handler: handler) //hardcode 1 returned url for each video.
 }
 
+func find_similar_videos_to_tag(tag: String, filters: [String:Any], handler: @escaping ([String])->()){
+    locate_based_on_topics(tags: [tag], filters: filters, ids: [], count: 10, handler: handler)
+    
+}
+
 
 // ---- HELPER FUNCTIONS ----
 func locate_based_on_topics(tags: [String], filters: [String:Any], ids: [String], count: Int, handler: @escaping ([String])->()){
@@ -42,17 +47,19 @@ func locate_based_on_topics(tags: [String], filters: [String:Any], ids: [String]
         //var json = get_tagged_video(url: url, filters: filters)
         
         
-        get_tagged_video(url: url, filters: filters, handler: {id in
-            new_ids.append(id)
+        get_tagged_video(url: url, count: count, filters: filters, handler: {ids in
+            for id in ids{
+                new_ids.append(id)
+            }
             
-            if(new_ids.count == tags.count){
+            if(new_ids.count >= tags.count){
                 handler(new_ids)
             }
         })
     }
 }
 
-func get_tagged_video(url: String, filters: [String:Any], handler: @escaping (String)->()){
+func get_tagged_video(url: String, count: Int, filters: [String:Any], handler: @escaping ([String])->()){
     Data1.searchRequest(url: url, closure: { json, error  in
         print(error ?? "nil")
         print(json ?? "nil")
@@ -60,7 +67,7 @@ func get_tagged_video(url: String, filters: [String:Any], handler: @escaping (St
         
         var search_ids = get_search_ids_from_response(json: json!)
         get_videos_info(search_ids: search_ids, handler: {search_video_info in
-            var id = filter_videos(filters: filters, video_info: search_video_info)
+            var id = filter_videos(filters: filters, all: count > 1, video_info: search_video_info)
             
             handler(id)
         })
@@ -116,7 +123,7 @@ func pull_video_info_request(id: String, handler: @escaping ([String:Any])->()){
     })
 }
 
-func filter_videos(filters: [String: Any], video_info: [[String:Any]]) -> String{
+func filter_videos(filters: [String: Any], all: Bool, video_info: [[String:Any]]) -> [String]{
     var urls : [String] = []
     var new_vid_info : [String:Any] = [:]
     
@@ -128,8 +135,10 @@ func filter_videos(filters: [String: Any], video_info: [[String:Any]]) -> String
         var vd = vid.value as! [String:Any]
         urls.append(vd["id"] as! String)
     }
-    
-    return urls[0]
+    if all{
+        return urls
+    }
+    return [urls[0]]
 }
 
 func sort_video_info(arg: String, rank_setting: Any, video_info: [[String:Any]]) -> [String:Any]{
